@@ -1,0 +1,457 @@
+
+SHA_LENGTH = 40
+CONTENT_IMAGE_MAX_BYTES = 5000000
+CONTENT_BLO_MAX_BYTES = 5000000
+
+/**
+* Type TypeShortEnum (radio)
+*/
+enum TypeShortEnum {
+  ENUM_1, ENUM_2, ENUM_3
+}
+
+/**
+* Type TypeLongEnum (select)
+*/
+enum TypeLongEnum {
+  ENUM_1, ENUM_2, ENUM_3, ENUM_4, ENUM_5, ENUM_6, ENUM_7, ENUM_8, ENUM_9
+}
+
+/**
+* Type TypeNAYesNo (radio)
+*/
+enum TypeYesNoNA {
+  NA, YES, NO
+}
+
+/**
+* ExEntityPagination_comment
+*/
+entity ExEntityPagination {
+
+  /**
+  * booleanEx_comment
+  */
+  booleanEx Boolean,
+
+  /**
+  * shortEnumEx_comment
+  */
+  shortEnumEx TypeShortEnum,
+
+  /**
+  * longEnumEx_comment
+  */
+  longEnumEx TypeLongEnum,
+
+  /**
+  * stringReqEx_comment
+  */
+  stringReqEx String required,
+
+  /**
+  * longMinMaxEx_comment
+  */
+  longMinMaxEx Long min(0) max(5)
+}
+
+
+/**
+* ExEntityPager_comment
+*/
+entity ExEntityPager {
+
+  /**
+  * booleanEx_comment
+  */
+  booleanEx Boolean,
+
+  /**
+  * shortEnumEx_comment
+  */
+  shortEnumEx TypeShortEnum,
+
+  /**
+  * longEnumEx_comment
+  */
+  longEnumEx TypeLongEnum,
+
+  /**
+  * stringReqEx_comment
+  */
+  stringReqEx String required,
+
+  /**
+  * longMinMaxEx_comment
+  */
+  longMinMaxEx Long min(0) max(5)
+}
+
+/**
+* ExEntityInfiniteScroll_comment
+*/
+entity ExEntityInfiniteScroll {
+
+  /**
+  * booleanEx_comment
+  */
+  booleanEx Boolean,
+
+  /**
+  * shortEnumEx_comment
+  */
+  shortEnumEx TypeShortEnum,
+
+  /**
+  * longEnumEx_comment
+  */
+  longEnumEx TypeLongEnum,
+
+  /**
+  * stringReqEx_comment
+  */
+  stringReqEx String required,
+
+  /**
+  * longMinMaxEx_comment
+  */
+  longMinMaxEx Long min(0) max(5),
+}
+
+/**
+* ExEntityForDateTime_comment
+*/
+entity ExEntityForDateTime {
+
+  /**
+  * zonedDateTimeReqEx_comment
+  */
+  zonedDateTimeReqEx ZonedDateTime required,
+
+  /**
+  * localDateReqEx_comment
+  */
+  localDateReqEx LocalDate required,
+
+  /**
+  * instantReq_comment
+  */
+  instantReqEx Instant required
+
+}
+
+/**
+* ExEntityForBlob_comment
+*/
+entity ExEntityForBlob {
+
+  /**
+  * imageBlobReqMinMaxReqEx_comment
+  */
+  imageBlobReqMinMaxReqEx ImageBlob required minbytes(1) maxbytes(CONTENT_IMAGE_MAX_BYTES) required,
+
+  /**
+  * textBlobReqEx_comment
+  */
+  textBlobReqEx TextBlob required,
+
+  /**
+  * blobMinMaxReqEx_comment
+  */
+  blobMinMaxReqEx Blob minbytes(1) maxbytes(CONTENT_BLO_MAX_BYTES) required,
+
+  /**
+  * anyBlobMinMaxReqEx_comment
+  */
+  anyBlobMinMaxReqEx AnyBlob minbytes(1) maxbytes(CONTENT_BLO_MAX_BYTES) required
+
+}
+
+
+/**
+* ExEntityBasicTypes_comment
+*/
+entity ExEntityBasicTypes {
+
+  /**
+  * booleanEx_comment
+  */
+  booleanEx Boolean,
+
+  /**
+  * booleanRequiredEx_comment
+  */
+  booleanRequiredEx Boolean required,
+
+  /**
+  * enumYesNoNARequiredEx_comment
+  */
+  enumYesNoNARequiredEx TypeYesNoNA required,
+
+  /**
+  * shortEnumEx_comment
+  */
+  shortEnumEx TypeShortEnum,
+
+  /**
+  * longEnumEx_comment
+  */
+  longEnumEx TypeLongEnum,
+
+  /**
+  * enumRequiredEx_comment
+  */
+  enumRequiredEx TypeLongEnum required,
+
+  /**
+  * stringMinMaxPatternEx_comment
+  */
+  stringMinMaxPatternEx String required minlength(5) maxlength(5) pattern(/[0-9]{5}/),
+
+  /**
+  * stringReqEx_comment
+  */
+  stringReqEx String required,
+
+  /**
+  * stringEx_comment
+  */
+  stringEx String,
+
+  /**
+  * textBlobReqEx_comment
+  */
+  textBlobReqEx TextBlob required,
+
+  /**
+  * intEx_comment
+  */
+  intEx Integer,
+
+   /**
+  * intMinMaxEx_comment
+  */
+  intMinMaxEx Integer min(0) max(5),
+
+  /**
+  * longMinMaxEx_comment
+  */
+  longMinMaxEx Long min(0) max(5),
+
+  /**
+  * longMinMaxReqEx_comment
+  */
+  longMinMaxReqEx Long min(0) max(5) required,
+
+   /**
+  * floatMinReqEx_comment
+  */
+  floatMinReqEx Float required min(0)
+}
+
+
+/**
+* ExEntity_comment
+*/
+entity ExEntity {
+
+  /**
+  * enumRequiredEx_comment
+  */
+  enumRequiredEx TypeLongEnum required,
+
+  /**
+  * stringEx_comment
+  */
+  stringEx String,
+
+  /**
+  * intMinMaxEx_comment
+  */
+  intMinMaxEx Integer min(0) max(5),
+
+  /**
+  * longMinMaxEx_comment
+  */
+  longMinMaxEx Long min(0) max(5),
+
+  /**
+  * longMinMaxReqEx_comment
+  */
+  longMinMaxReqEx Long min(0) max(5) required,
+
+  /**
+  * yesNoNAReqEx_comment
+  */
+  yesNoNAReqEx TypeYesNoNA required,
+
+  /**
+  * stringMinMaxPatternEx_comment
+  */
+  stringMinMaxPatternEx String minlength(5) maxlength(5) pattern(/[0-9]{5}/),
+
+  /**
+  * floatMinReqEx_comment
+  */
+  floatMinReqEx Float required min(0),
+
+  /**
+  * zonedDateTimeReqEx_comment
+  */
+  zonedDateTimeReqEx ZonedDateTime required,
+
+  /**
+  * localDateReqEx_comment
+  */
+  localDateReqEx LocalDate required,
+
+  /**
+  * instantReq_comment
+  */
+  instantReq Instant required,
+
+  /**
+  * booleanReqEx_comment
+  */
+  booleanReqEx Boolean required,
+
+  /**
+  * imageBlobReqMinMaxReqEx_comment
+  */
+  imageBlobReqMinMaxReqEx ImageBlob required minbytes(1) maxbytes(CONTENT_IMAGE_MAX_BYTES) required,
+
+  /**
+  * textBlobReqEx_comment
+  */
+  textBlobReqEx TextBlob required,
+
+  /**
+  * blobMinMaxReqEx_comment
+  */
+  blobMinMaxReqEx Blob minbytes(1) maxbytes(CONTENT_BLO_MAX_BYTES) required,
+
+  /**
+  * anyBlobMinMaxReqEx_comment
+  */
+  anyBlobMinMaxReqEx AnyBlob minbytes(1) maxbytes(CONTENT_BLO_MAX_BYTES) required
+
+}
+
+entity Photo {
+
+  /**
+  * Postprocessed image of the photo
+  */
+  image ImageBlob required maxbytes(CONTENT_IMAGE_MAX_BYTES),
+  imageSha1 String minlength(SHA_LENGTH) maxlength(SHA_LENGTH) pattern(/[a-fA-F0-9]{40}/),
+
+  /**
+  * Thumbail of the image
+  */
+  thumbnail ImageBlob required maxbytes(CONTENT_IMAGE_MAX_BYTES),
+  thumbnailSha1 String minlength(SHA_LENGTH) maxlength(SHA_LENGTH) pattern(/[a-fA-F0-9]{40}/)
+
+  /**
+  * Original image of the photo (with EXIF)
+  */
+  imageOriginal ImageBlob required maxbytes(CONTENT_IMAGE_MAX_BYTES),
+  imageOriginalSha1 String minlength(SHA_LENGTH) maxlength(SHA_LENGTH) pattern(/[a-fA-F0-9]{40}/),
+
+  /**
+  * CDN of the image
+  */
+  imageCdn String,
+
+  /**
+  * CDN of the image
+  */
+  thumbnailCdn String
+
+}
+
+entity Location {
+  /**
+  * The location name
+  */
+	locationName String minlength(2),
+
+  /**
+  * The location WGS 84 (World Geodetic System 1984)
+  */
+  locationWGS String pattern(/([-+]?[0-9]{1,2}([.][0-9]+)?),([-+]?[0-9]{1,3}([.][0-9]+)?)/),
+
+  /**
+  * Location PlusCode (https://plus.codes/). TODO pattern
+  */
+  locationPlusCode String
+
+  /**
+  * The location reverse geocoding (computed from locationWGS by frontend or backend)
+  */
+  reverseGeocodingLocation String,
+}
+
+entity UserProfile {
+  /**
+  * stringEx_comment
+  */
+  stringEx String,
+
+  /**
+  * textBlobReqEx_comment
+  */
+  textBlobReqEx TextBlob required
+}
+
+relationship ManyToMany {
+  Location{relatedTo} to ExEntity{locations}
+}
+
+relationship OneToOne {
+  Photo to Location,
+  UserProfile to Location,
+  UserProfile{user(login)} to User,
+  ExEntityBasicTypes{exRelOO1} to User
+}
+
+relationship ManyToOne {
+
+  ExEntity{exRelMO1} to UserProfile,
+  ExEntityBasicTypes{exRelMO2} to UserProfile,
+
+  Photo{createdByUP} to UserProfile{photos},
+  Photo{relatedTo} to ExEntity
+}
+
+/*
+relationship OneToMany {
+  // TODO
+}
+*/
+
+// Set pagination options
+
+paginate ExEntity with infinite-scroll
+paginate ExEntityInfiniteScroll with infinite-scroll
+paginate ExEntityPagination with pagination
+paginate ExEntityPager with pager
+
+paginate UserProfile with pagination
+paginate Location with pagination
+paginate Photo with pagination
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+//service all with serviceClass
+
+// Set an angular suffix
+//angularSuffix * with matapp
+
+// Set search
+//search * with elasticsearch
+
+// Set filtering
+filter *

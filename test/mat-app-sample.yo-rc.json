@@ -1,0 +1,38 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "jh.matappsample",
+            "nativeLanguage": "fr"
+        },
+        "jhipsterVersion": "5.8.2",
+        "applicationType": "monolith",
+        "baseName": "genmat",
+        "packageName": "jh.matappsample",
+        "packageFolder": "jh/matappsample",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": true,
+        "websocket": "spring-websocket",
+        "databaseType": "sql",
+        "devDatabaseType": "h2Disk",
+        "prodDatabaseType": "postgresql",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": false,
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "ZDJjODdmYWFkMGM0YmE1NmQ2Y2ViOWM4NjQzNGYwMTc4YTUwZGYyNzczNWQ1ZjQ5NmU0YTZmMGQ0MTFjZjM2YWM3ODhkZWJhOTYxMGUwYmY3MDEwZDQ3OTA1NjMyY2I3OGVlYjUzNTZhYTY1Y2UzN2I5MDUyNGQ1NjIyNmNhYjY=",
+        "clientFramework": "angularX",
+        "useSass": true,
+        "clientPackageManager": "npm",
+        "testFrameworks": ["gatling", "cucumber", "protractor"],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [],
+        "enableTranslation": true,
+        "nativeLanguage": "fr",
+        "languages": ["fr","en"]
+    }
+}
