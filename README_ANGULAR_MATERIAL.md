@@ -57,12 +57,15 @@ yarn start
 * Move to Angular v8 and JHipster v6
 * Remove all Bootstrap CSS classes in elements
 * Material Design good practices https://material.io/design/
+* API Gateway
 
 ### client
 * admin : continue to add material buttons, inputs, ...
+* avatar letter : for login menu https://github.com/uttesh/ngu-utility http://uttesh.com/ngletteravatar/
+* replace alert by snackbar https://material.angular.io/components/snack-bar
 
 ### entity-client
-* date
+* date (date picker)
 * image blob
 * blob
 * search
@@ -70,7 +73,10 @@ yarn start
 * infinite-scroll
 * pager
 * entity-management.component --> mat-list
-
+* replace the delete modal by a delete dialog
+* replace all the jhi-alert by snackbar https://material.angular.io/components/snack-bar
+* vindow closing prevention
+* optional : stepper or mat-tab for long input forms
 
 ## References
 * https://material.angular.io/
