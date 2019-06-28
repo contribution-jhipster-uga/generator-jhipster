@@ -31,6 +31,8 @@ import { Title } from '@angular/platform-browser';
 })
 export class <%=jhiPrefixCapitalized%>MainComponent implements OnInit {
 
+    otherTheme = false;
+
     constructor(
         <%_ if (enableTranslation) { _%>
         private jhiLanguageHelper: JhiLanguageHelper,

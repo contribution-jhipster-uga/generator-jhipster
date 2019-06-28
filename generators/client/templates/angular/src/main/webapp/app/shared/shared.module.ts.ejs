@@ -29,8 +29,11 @@ import {
     HasAnyAuthorityDirective
 } from './';
 
+import { JhMaterialModule } from 'app/shared/jh-material.module';
+
 @NgModule({
     imports: [
+        JhMaterialModule,
         <%=angularXAppName%>SharedLibsModule,
         <%=angularXAppName%>SharedCommonModule
     ],
@@ -47,6 +50,7 @@ import {
     entryComponents: [<%=jhiPrefixCapitalized%>LoginModalComponent],
     <%_ } _%>
     exports: [
+        JhMaterialModule,
         <%=angularXAppName%>SharedCommonModule,
         <%_ if (authenticationType !== 'oauth2') { _%>
         <%=jhiPrefixCapitalized%>LoginModalComponent,

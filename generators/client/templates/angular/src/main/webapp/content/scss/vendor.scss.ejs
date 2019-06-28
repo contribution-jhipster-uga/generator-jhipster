@@ -31,4 +31,16 @@ eg $input-color: red;
 <%_ } _%>
 
 
+@import '~@angular/material/theming';
+@include mat-core();
+
+// Extra themes can be added into ./themes
+@import 'themes/jhipster-theme';
+@include angular-material-theme($jhipster-theme);
+
+@import 'themes/alt-theme';
+.alternative {
+    @include angular-material-theme($alt-theme);
+}
+
 /* jhipster-needle-scss-add-vendor JHipster will add new css style */

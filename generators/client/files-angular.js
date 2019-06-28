@@ -69,7 +69,7 @@ const files = {
         {
             condition: generator => generator.useSass,
             path: MAIN_SRC_DIR,
-            templates: ['content/scss/_bootstrap-variables.scss', 'content/scss/global.scss', 'content/scss/vendor.scss']
+            templates: ['content/scss/_bootstrap-variables.scss', 'content/scss/global.scss', 'content/scss/vendor.scss', 'content/scss/themes/jhipster-theme.scss', 'content/scss/themes/alt-theme.scss']
         },
         {
             condition: generator => generator.useSass && generator.enableI18nRTL,
@@ -241,12 +241,22 @@ const files = {
         {
             condition: generator => generator.useSass && generator.authenticationType !== 'oauth2',
             path: ANGULAR_DIR,
-            templates: ['account/password/password-strength-bar.scss']
+            templates: [
+                'account/password/password-strength-bar.scss',
+                'account/password/password.component.scss',
+                'account/settings/settings.component.scss',
+                'account/register/register.component.scss'
+            ]
         },
         {
             condition: generator => !generator.useSass && generator.authenticationType !== 'oauth2',
             path: ANGULAR_DIR,
-            templates: ['account/password/password-strength-bar.css']
+            templates: [
+                'account/password/password-strength-bar.scss',
+                'account/password/password.component.scss',
+                'account/settings/settings.component.scss',
+                'account/register/register.component.scss'
+            ]
         }
     ],
     angularAdminModule: [
@@ -329,7 +339,15 @@ const files = {
                 { file: 'admin/gateway/gateway.component.html', method: 'processHtml' },
                 'admin/gateway/gateway-routes.service.ts'
             ]
+        },
+        {
+            condition: generator => generator.useSass,
+            path: ANGULAR_DIR,
+            templates: [
+                'admin/logs/logs.component.scss'
+            ]
         }
+
     ],
     angularCore: [
         {
@@ -369,6 +387,7 @@ const files = {
                 'shared/shared.module.ts',
                 'shared/shared-libs.module.ts',
                 'shared/shared-common.module.ts',
+                //
                 'shared/constants/error.constants.ts',
                 'shared/constants/input.constants.ts',
                 'shared/constants/pagination.constants.ts',
@@ -378,7 +397,11 @@ const files = {
                 'shared/alert/alert.component.ts',
                 'shared/alert/alert-error.component.ts',
                 // dates
-                'shared/util/datepicker-adapter.ts'
+                'shared/util/datepicker-adapter.ts',
+                // For material
+                'shared/jh-material.module.ts',
+                // For formcontrol
+                'shared/custom-error-state-matcher.ts'
             ]
         },
         {

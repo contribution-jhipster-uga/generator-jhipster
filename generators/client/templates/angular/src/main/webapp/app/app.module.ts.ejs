@@ -40,6 +40,11 @@ import { <%=angularXAppName%>AccountModule } from './account/account.module';
 <%_ } _%>
 import { <%=angularXAppName%>EntityModule } from './entities/entity.module';
 import * as moment from 'moment';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import 'hammerjs';
+
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
     <%=jhiPrefixCapitalized%>MainComponent,
@@ -55,6 +60,9 @@ import {
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+
         Ng2Webstorage.forRoot({ prefix: '<%=jhiPrefixDashed %>', separator: '-'}),
         NgJhipsterModule.forRoot({
             // set below to true to make alerts look like toast

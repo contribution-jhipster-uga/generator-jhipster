@@ -1,0 +1,44 @@
+// Customizable with http://mcg.mbitson.com/#!?jhipstertheme2
+
+$md-jhipstertheme2: (
+    50 : #f7e4e6,
+    100 : #ecbcc0,
+    200 : #df8f97,
+    300 : #d2626d,
+    400 : #c9404d,
+    500 : #bf1e2e,
+    600 : #b91a29,
+    700 : #b11623,
+    800 : #a9121d,
+    900 : #9b0a12,
+    A100 : #ffc9cb,
+    A200 : #ff9699,
+    A400 : #ff6368,
+    A700 : #ff4950,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$alt-primary: mat-palette($md-jhipstertheme2, 900);
+$alt-accent: mat-palette($md-jhipstertheme2, 100);
+$alt-warn: mat-palette($mat-red, 500);
+
+$alt-theme: mat-light-theme(
+  $alt-primary,
+  $alt-accent,
+  $alt-warn
+);
