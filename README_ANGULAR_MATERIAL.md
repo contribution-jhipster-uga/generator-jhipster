@@ -18,6 +18,9 @@ git branch
 git checkout angular-material
 git branch
 
+#npm set prefix ~/.npm
+#PATH="$HOME/.npm/bin:$PATH"
+#PATH="./node_modules/.bin:$PATH"
 npm install -g
 ```
 
@@ -52,6 +55,7 @@ yarn start
 
 * Refactor the generator as a blueprint
 * Move to Angular v8 and JHipster v6
+* Remove all Bootstrap CSS classes in elements
 * Material Design good practices https://material.io/design/
 
 ### client
@@ -71,3 +75,4 @@ yarn start
 ## References
 * https://material.angular.io/
 * https://material.io/design/
+* Theming with wonderful http://mcg.mbitson.com/#!?mcgpalette0=%23ea1212&themename=mcgtheme  :heart:  :heart:
