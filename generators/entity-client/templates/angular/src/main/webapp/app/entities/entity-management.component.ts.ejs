@@ -34,18 +34,33 @@ import { ITEMS_PER_PAGE } from 'app/shared';
 <%_ } _%>
 import { <%= entityAngularName %>Service } from './<%= entityFileName %>.service';
 
+<%_ if (pagination === 'pagination' || pagination === 'pager') { _%>
+import {PageEvent} from '@angular/material';
+<%_ } _%>
+    
+
 @Component({
     selector: '<%= jhiPrefixDashed %>-<%= entityFileName %>',
     templateUrl: './<%= entityFileName %>.component.html'
+    , styleUrls: ['./<%= entityFileName %>.component.scss']
 })
 export class <%= entityAngularName %>Component implements OnInit, OnDestroy {
     <%_ if (pagination === 'pagination' || pagination === 'pager') { _%>
 <%- include('pagination-template', {toArrayString: toArrayString}); -%>
+
+
+    // MatPaginator
+    pageSize = 10;
+    pageSizeOptions: number[] = [10, 20, 50, 100];
+    // MatPaginator Output
+    pageEvent: PageEvent;
+
     <%_ } else if (pagination === 'infinite-scroll') { _%>
 <%- include('infinite-scroll-template', {toArrayString: toArrayString}); -%>
     <%_ } else if (pagination === 'no') { _%>
 <%- include('no-pagination-template', {toArrayString: toArrayString}); -%>
     <%_ } _%>
+    isGrid: boolean = true;
 
     ngOnInit() {
         this.loadAll();

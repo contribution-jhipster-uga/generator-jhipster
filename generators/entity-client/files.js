@@ -97,6 +97,22 @@ const angularFiles = {
                 {
                     file: 'entities/entity.service.ts',
                     renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityServiceFileName}.service.ts`
+                },
+                {
+                    file: 'entities/entity-management.component.scss',
+                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}.component.scss`
+                },
+                {
+                    file: 'entities/entity-management-delete-dialog.component.scss',
+                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}-delete-dialog.component.scss`
+                },
+                {
+                    file: 'entities/entity-management-update.component.scss',
+                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}-update.component.scss`
+                },
+                {
+                    file: 'entities/entity-management-detail.component.scss',
+                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}-detail.component.scss`
                 }
             ]
         }

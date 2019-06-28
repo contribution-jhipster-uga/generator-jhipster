@@ -1,0 +1,59 @@
+.jh-mat-chip {
+    display: inline-block;
+    padding: 0 10px;
+    //height: 50px;
+    //font-size: 16px;
+    line-height: 30px;
+    border-radius: 15px;
+    color: #ffffff;
+    //font-weight: bold;
+    background-color: #ff0000;
+}
+
+.jh-mat-zoom {
+}
+.jh-mat-zoom:hover {
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.jh-mat-card-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+/* Column Gap */
+.jh-mat-card-list > * {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+}
+.jh-mat-card-list > *:not(:last-child) {
+    margin-right: 32px;
+}
+/* Item sizing */
+.jh-mat-card-list-item {
+    flex: 0 1 calc(33.3% - 32px);
+}
+/* medium size viewport */
+@media screen and (max-width: 959px) {
+    /* Column Gap */
+    .jh-mat-card-list > *:not(:last-child) {
+        margin-right: 32px;
+    }
+    /* Item sizing */
+    .jh-mat-card-list-item {
+        flex: 0 1 calc(50% - 32px);
+    }
+}
+/* small size viewport */
+@media screen and (max-width: 599px) {
+    .jh-mat-card-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .jh-mat-card-list-item > *:not(:last-child) {
+        margin-right: unset;
+        margin-bottom: 32px;
+    }
+}

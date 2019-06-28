@@ -27,6 +27,10 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CustomErrorStateMatcher } from '../../shared/custom-error-state-matcher';
+
 <%_ if ( fieldsContainDate ) { _%>
 import * as moment from 'moment';
     <%_ if ( fieldsContainInstant || fieldsContainZonedDateTime ) { _%>
@@ -65,22 +69,26 @@ import { <%= uniqueRel.otherEntityAngularName%>Service } from 'app/entities/<%= 
 @Component({
     selector: '<%= jhiPrefixDashed %>-<%= entityFileName %>-update',
     templateUrl: './<%= entityFileName %>-update.component.html'
+    , styleUrls: ['./<%= entityFileName %>-update.component.scss']
 })
 export class <%= entityAngularName %>UpdateComponent implements OnInit {
 
     <%= entityInstance %>: I<%= entityAngularName %>;
     isSaving: boolean;
+
+    // FormControl
+    esMatcher = new CustomErrorStateMatcher();
+    formFC: FormGroup;
+
     <%_
     for ( const idx in variables ) { %>
     <%- variables[idx] %>
     <%_ } _%>
     <%_ for ( idx in fields ) {
         const fieldName = fields[idx].fieldName;
-        const fieldType = fields[idx].fieldType;
-        if ( fieldType === 'LocalDate' ) { _%>
-    <%= fieldName %>Dp: any;
-    <%_ } else if ( ['Instant', 'ZonedDateTime'].includes(fieldType) ) { _%>
-    <%= fieldName %>: string;
+        const fieldType = fields[idx].fieldType; _%>
+    <%_ if ( ['Instant', 'ZonedDateTime', 'LocalDate'].includes(fieldType) ) { _%>
+        <%= fieldName %>: string;
       <%_ } _%>
     <%_ } _%>
 
@@ -104,18 +112,117 @@ export class <%= entityAngularName %>UpdateComponent implements OnInit {
         <%_ if (fieldsContainImageBlob) { _%>
         protected elementRef: ElementRef,
         <%_ } _%>
-        protected activatedRoute: ActivatedRoute
+        protected activatedRoute: ActivatedRoute,
+        private fb: FormBuilder
+
     ) {
     }
 
     ngOnInit() {
+        const g = {};
+        g.id = new FormControl('', []);
+        <%_ for (idx in fields) {
+            const fieldName = fields[idx].fieldName;
+            const fieldNameCapitalized = fields[idx].fieldNameCapitalized;
+            const fieldNameHumanized = fields[idx].fieldNameHumanized;
+            const fieldType = fields[idx].fieldType;
+            const fieldTypeBlobContent = fields[idx].fieldTypeBlobContent;
+            let fieldInputType = 'text';
+            let ngModelOption = '';
+            const translationKey = `${i18nKeyPrefix}.${fieldName}`;
+            if (['Integer', 'Long', 'Float', 'Double', 'BigDecimal'].includes(fieldType)) {
+                fieldInputType = 'number';
+            } else if (fieldType === 'LocalDate') {
+                fieldInputType = 'date';
+            } else if (['Instant', 'ZonedDateTime'].includes(fieldType)) {
+                fieldInputType = 'datetime-local';
+            } else if (fieldType === 'Boolean') {
+                fieldInputType = 'checkbox';
+            } else if (['byte[]', 'ByteBuffer'].includes(fieldType) && fieldTypeBlobContent !== 'text') {
+                fieldInputType = 'hidden';
+            }
+        _%>
+            <%_ if (fields[idx].fieldValidate === true) { _%>
+                {
+                    const v = [];
+                    <%_ if (fields[idx].fieldValidateRules.includes('required')) { _%>
+                        v.push(Validators.required);
+                    <%_ }  _%>
+                    <%_ if (fields[idx].fieldValidateRules.includes('minlength')) { _%>
+                        v.push(Validators.minLength(<%= fields[idx].fieldValidateRulesMinlength %>));
+                    <%_ }  _%>
+                    <%_ if (fields[idx].fieldValidateRules.includes('maxlength')) { _%>
+                        v.push(Validators.maxLength(<%= fields[idx].fieldValidateRulesMaxlength %>));
+                    <%_ }  _%>
+                    <%_ if (fields[idx].fieldValidateRules.includes('min')) { _%>
+                        v.push(Validators.min(<%= fields[idx].fieldValidateRulesMin %>));
+                    <%_ } _%>
+                    <%_ if (fields[idx].fieldValidateRules.includes('max')) { _%>
+                        v.push(Validators.max(<%= fields[idx].fieldValidateRulesMax %>));
+                    <%_ } _%>
+                    <%_ if (fields[idx].fieldValidateRules.includes('minbytes')) { _%>
+                        v.push(Validators.minbytes(<%= fields[idx].fieldValidateRulesMinbytes %>));
+                    <%_ } _%>
+                    <%_ if (fields[idx].fieldValidateRules.includes('maxbytes')) { _%>
+                        v.push(Validators.maxbytes(<%= fields[idx].fieldValidateRulesMaxbytes %>));
+                    <%_ } _%>
+                    <%_ if (fields[idx].fieldValidateRules.includes('pattern')) { _%>
+                        v.push(Validators.pattern('<%= fields[idx].fieldValidateRulesPattern %>'));
+                    <%_ } _%>
+                    <%_ if (['Integer', 'Long', 'Float', 'Double', 'BigDecimal'].includes(fieldType)) { _%>
+                        //v.push(Validators.number); TODO custom validator for number
+                        v.push(Validators.pattern('[0-9]*'));
+                    <%_ } _%>
+                    <%_ if (['Instant', 'ZonedDateTime'].includes(fieldType)) { _%>
+                        // TODO ZonedDateTime
+                    <%_ } _%>
+                    
+                    g.<%= fieldName %> = new FormControl('', v  );
+                }
+            <%_ } else { _%>
+                g.<%= fieldName %> = new FormControl('', []);
+            <%_ } _%>
+
+        <%_ }  _%>
+
+        <%_ for (idx in relationships) {
+            const relationshipType = relationships[idx].relationshipType;
+            const ownerSide = relationships[idx].ownerSide;
+            const otherEntityName = relationships[idx].otherEntityName;
+            const otherEntityNamePlural = relationships[idx].otherEntityNamePlural;
+            const otherEntityNameCapitalized = relationships[idx].otherEntityNameCapitalized;
+            const relationshipName = relationships[idx].relationshipName;
+            const relationshipNameHumanized = relationships[idx].relationshipNameHumanized;
+            const relationshipFieldName = relationships[idx].relationshipFieldName;
+            const relationshipFieldNamePlural = relationships[idx].relationshipFieldNamePlural;
+            const otherEntityField = relationships[idx].otherEntityField;
+            const otherEntityFieldCapitalized = relationships[idx].otherEntityFieldCapitalized;
+            const relationshipRequired = relationships[idx].relationshipRequired;
+            const translationKey = `${i18nKeyPrefix}.${relationshipName}`; _%>
+
+            <%_ if (relationships[idx].relationshipValidate === true) { _%>
+                {
+                    const v = [];
+                    <%_ if (relationshipRequired) { _%>
+                        v.push(Validators.required);
+                    <%_ }  _%>
+                    g.<%= relationshipName %>Id = new FormControl('', v  );
+                }
+            <%_ } else { _%>
+                g.<%= relationshipName %>Id = new FormControl('', []);
+            <%_ } _%>
+
+        <%_ }  _%>
+        
+        this.formFC = this.fb.group(g);    
+
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({<%= entityInstance %>}) => {
             this.<%= entityInstance %> = <%= entityInstance %>;
 <%_ for (idx in fields) {
     const fieldName = fields[idx].fieldName;
     const fieldType = fields[idx].fieldType;
-    if (['Instant', 'ZonedDateTime'].includes(fieldType)) { _%>
+    if (['Instant', 'ZonedDateTime', 'LocalDate'].includes(fieldType)) { _%>
             this.<%= fieldName %> = this.<%= entityInstance %>.<%= fieldName %> != null ? this.<%= entityInstance %>.<%= fieldName %>.format(DATE_TIME_FORMAT) : null;
     <%_ } _%>
 <%_ } _%>

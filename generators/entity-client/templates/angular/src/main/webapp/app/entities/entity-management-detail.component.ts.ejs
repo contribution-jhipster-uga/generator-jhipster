@@ -27,6 +27,7 @@ import { I<%= entityAngularName %> } from 'app/shared/model/<%= entityModelFileN
 @Component({
     selector: '<%= jhiPrefixDashed %>-<%= entityFileName %>-detail',
     templateUrl: './<%= entityFileName %>-detail.component.html'
+    , styleUrls: ['./<%= entityFileName %>-detail.component.scss']
 })
 export class <%= entityAngularName %>DetailComponent implements OnInit {
 
