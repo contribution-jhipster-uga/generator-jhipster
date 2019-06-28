@@ -77,6 +77,7 @@ yarn start
 * replace all the jhi-alert by snackbar https://material.angular.io/components/snack-bar
 * vindow closing prevention
 * optional : stepper or mat-tab for long input forms
+* add flags into languages menu
 
 ## References
 * https://material.angular.io/
