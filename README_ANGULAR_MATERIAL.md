@@ -34,6 +34,7 @@ mkdir test-generator-jhipster-angular-material
 mv __node_modules test-generator-jhipster-angular-material/node_modules
 cd test-generator-jhipster-angular-material
 cp ../generator-jhipster/test/mat-app-sample.yo-rc.json .yo-rc.json
+npm link generator-jhipster
 jhipster --debug
 npm link generator-jhipster
 jhipster --debug import-jdl ../generator-jhipster/test/mat-app-sample.jh
@@ -53,6 +54,7 @@ yarn start
 
 ## TODOLIST
 
+### general
 * Refactor the generator as a blueprint
 * Move to Angular v8 and JHipster v6
 * Remove all Bootstrap CSS classes in elements
@@ -61,8 +63,9 @@ yarn start
 
 ### client
 * admin : continue to add material buttons, inputs, ...
-* avatar letter : for login menu https://github.com/uttesh/ngu-utility http://uttesh.com/ngletteravatar/
 * replace alert by snackbar https://material.angular.io/components/snack-bar
+* avatar letter : for login menu https://github.com/uttesh/ngu-utility http://uttesh.com/ngletteravatar/
+* login: save remenberMe with a WebStorage service
 
 ### entity-client
 * date (date picker)
@@ -78,6 +81,8 @@ yarn start
 * vindow closing prevention
 * optional : stepper or mat-tab for long input forms
 * add flags into languages menu
+* add aria-label for accessility
+* update e2e tests
 
 ## References
 * https://material.angular.io/
